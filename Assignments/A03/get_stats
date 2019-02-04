@@ -40,4 +40,3 @@ for year in years:
                     url = "http://www.nfl.com/liveupdate/game-center/%s/%s_gtd.json" % (sgameid,gameid)
                     page = scraper.go(url)
                     f.write(json.dumps(page.text))
-                    pass
