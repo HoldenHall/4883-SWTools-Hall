@@ -28,3 +28,16 @@ for year in years:
                     url = "http://www.nfl.com/liveupdate/game-center/%s/%s_gtd.json" % (sgameid,gameid)
                     page = scraper.go(url)
                     f.write(json.dumps(page.text))
+
+for year in years:
+            for team in teams:
+                try:
+                   sgameid = gameid = data["POST"][str(year)]
+                   f = open(gameid+".json","w")
+                except:
+                    pass
+                else:
+                    url = "http://www.nfl.com/liveupdate/game-center/%s/%s_gtd.json" % (sgameid,gameid)
+                    page = scraper.go(url)
+                    f.write(json.dumps(page.text))
+                    pass
