@@ -28,7 +28,6 @@ for year in years:
                 divs = page.find_all('div',{"class":"schedules-list-content"})
                 for div in divs[:]:
                         gameids["REG"][year][week].append(div['data-gameid'])
-                        print(div['data-gameid'])
                         shuffle(delays)
                         sleep(delays[0])
 
@@ -39,7 +38,6 @@ for year in years:
         divs = page.find_all('div',{"class":"schedules-list-content"})
         for div in divs[:]:
                 gameids["POST"][year]= div['data-gameid']
-                print(div['data-gameid'])
                 shuffle(delays)
                 sleep(delays[0])
 
