@@ -15,8 +15,9 @@ if (mysqli_connect_errno($mysqli)) {
 
 require "query_function.php";
 
+echo "<pre>";
 
-echo "Name: Holden Hall\nAssignment: A04 - Nfl Stats\n3-1-2019";
+echo "Name: Holden Hall\nAssignment: A04 - Nfl Stats\n3-1-2019\n";
 
 
 echo "Q1: \n";
@@ -30,7 +31,11 @@ if ($response['success']) {
             echo sizeof($data) . "\n";
             // loop through our result array
             for ($i = 0; $i < sizeof($data); $i++) {
-                echo "\t{$data[$i]['PlayerID']} \t{$data[$i]['Name']} \t{$data[$i]['# Teams']}\n";
+                #echo "\t{$data[$i]['id']} \t{$data[$i]['name']} \t{$data[$i]['team']}\n";
+                echo str_pad($data[$i]['id'],15);
+                echo str_pad($data[$i]['name'],20);
+                echo str_pad($data[$i]['team'],10);
+                echo "\n\n";
             }
 
         }
@@ -39,11 +44,11 @@ if ($response['success']) {
 
 echo "Q2: \n";
 
-$sql = "SELECT players_stats.playerid,players.name,players_stats.season,sum(players_stats.yards) 
+$sql = "SELECT players_stats.playerid,players.name,players_stats.season, sum(players_stats.yards)  as `yards`
 FROM players_stats INNER JOIN players on players_stats.playerid = players.id
 WHERE statid = 10 
 GROUP BY players_stats.playerid,players.name,players_stats.yards,players_stats.season  
-ORDER BY `sum(players_stats.yards)` DESC
+ORDER BY `yards` DESC
 limit 10";
 
 $response = runQuery($mysqli, $sql);
@@ -53,18 +58,23 @@ if ($response['success']) {
             echo sizeof($data) . "\n";
             // loop through our result array
             for ($i = 0; $i < sizeof($data); $i++) {
-                echo "\t{$data[$i]['PlayerID']} \t{$data[$i]['Name']} \t{$data[$i]['Year']} \t{$data[$i]['# Yards']}\n";
+                #echo "\t{$data[$i]['Playerid']} \t{$data[$i]['name']} \t{$data[$i]['season']} \t{$data[$i]['yards']}\n";
+                echo str_pad($data[$i]['playerid'],15);
+                echo str_pad($data[$i]['name'],20);
+                echo str_pad($data[$i]['season'],10);
+                echo str_pad($data[$i]['yards'],10);
+                echo "\n\n";
             }
 
         }
 
 echo "Q3: \n";
 
-$sql = "SELECT players_stats.playerid,players.name,players_stats.season,sum(players_stats.yards) 
+$sql = "SELECT players_stats.playerid,players.name,players_stats.season,sum(players_stats.yards) as `yards`
 FROM players_stats INNER JOIN players on players_stats.playerid = players.id
 WHERE statid = 15
 GROUP BY players_stats.playerid,players.name,players_stats.yards,players_stats.season  
-ORDER BY `sum(players_stats.yards)` ASC
+ORDER BY `yards` ASC
 limit 10";
 
 $response = runQuery($mysqli, $sql);
@@ -74,7 +84,12 @@ if ($response['success']) {
             echo sizeof($data) . "\n";
             // loop through our result array
             for ($i = 0; $i < sizeof($data); $i++) {
-                echo "\t{$data[$i]['PlayerID']} \t{$data[$i]['Name']} \t{$data[$i]['Year']} \t{$data[$i]['# Yards']}\n";
+                #echo "\t{$data[$i]['playerid']} \t{$data[$i]['name']} \t{$data[$i]['season']} \t{$data[$i]['yards']}\n";
+                echo str_pad($data[$i]['playerid'],15);
+                echo str_pad($data[$i]['name'],20);
+                echo str_pad($data[$i]['season'],10);
+                echo str_pad($data[$i]['yards'],10);
+                echo "\n\n";
             }
 
         }
@@ -84,11 +99,11 @@ if ($response['success']) {
 
 echo "Q4: \n";
 
-$sql = "SELECT players_stats.playerid,players.name,sum(players_stats.yards) 
+$sql = "SELECT players_stats.playerid,players.name,sum(players_stats.yards) as `yards`
 FROM players_stats INNER JOIN players on players_stats.playerid = players.id 
 WHERE statid = 10 
 GROUP BY players_stats.playerid,players.name,players_stats.yards 
-ORDER BY `sum(players_stats.yards)` 
+ORDER BY `yards` 
 ASC limit 10";
 
 $response = runQuery($mysqli, $sql);
@@ -98,7 +113,11 @@ if ($response['success']) {
             echo sizeof($data) . "\n";
             // loop through our result array
             for ($i = 0; $i < sizeof($data); $i++) {
-                echo "\t{$data[$i]['PlayerID']} \t{$data[$i]['Name']}\t{$data[$i]['# Yards']}\n";
+                #echo "\t{$data[$i]['playerid']} \t{$data[$i]['name']}\t{$data[$i]['yards']}\n";
+                echo str_pad($data[$i]['playerid'],15);
+                echo str_pad($data[$i]['name'],20);
+                echo str_pad($data[$i]['yards'],10);
+                echo "\n\n";
             }
 
         }
@@ -106,7 +125,7 @@ if ($response['success']) {
 
 echo "Q5: \n";
 
-$sql = "SELECT club,sum(pen) from game_totals group by club order by sum(pen) desc limit 5";
+$sql = "SELECT club,sum(pen) as pen from game_totals group by club order by pen desc limit 5";
 
 $response = runQuery($mysqli, $sql);
 
@@ -115,7 +134,10 @@ if ($response['success']) {
             echo sizeof($data) . "\n";
             // loop through our result array
             for ($i = 0; $i < sizeof($data); $i++) {
-                echo "\t{$data[$i]['Team']} \t{$data[$i]['Penalties']}\n";
+                #echo "\t{$data[$i]['club']} \t{$data[$i]['pen']}\n";
+                echo str_pad($data[$i]['club'],10);
+                echo str_pad($data[$i]['pen'],10);
+                echo "\n\n";
             }
 
         }
@@ -123,7 +145,7 @@ if ($response['success']) {
 
 echo "Q5_2: \n";
 
-$sql = "SELECT season,club,sum(pen), sum(pen)/16 from game_totals group by season,club order by sum(pen) desc limit 10";
+$sql = "SELECT season,club,sum(pen) as pen, sum(pen)/16 as avgpen from game_totals group by season,club order by pen desc limit 10";
 
 $response = runQuery($mysqli, $sql);
 
@@ -132,17 +154,21 @@ if ($response['success']) {
             echo sizeof($data) . "\n";
             // loop through our result array
             for ($i = 0; $i < sizeof($data); $i++) {
-                echo "\t{$data[$i]['Season']} \t{$data[$i]['Total Penalties']} \t{$data[$i]['Avg Penalties']}\n";
+                #echo "\t{$data[$i]['season']} \t{$data[$i]['pen']} \t{$data[$i]['avgpen']}\n";
+                echo str_pad($data[$i]['season'],10);
+                echo str_pad($data[$i]['pen'],10);
+                echo str_pad($data[$i]['avgpen'],10);
+                echo "\n\n";
             }
 
         }
 
 echo "Q6: \n";
 
-$sql = "SELECT plays.clubid,games.season,count(plays.gameid) 
+$sql = "SELECT plays.clubid,games.season,count(plays.gameid) as playcount
 FROM plays inner join games on plays.gameid = games.gameid 
 group by plays.clubid,games.season 
-order by count(plays.gameid) ASC 
+order by playcount ASC 
 limit 10";
 
 $response = runQuery($mysqli, $sql);
@@ -152,7 +178,11 @@ if ($response['success']) {
             echo sizeof($data) . "\n";
             // loop through our result array
             for ($i = 0; $i < sizeof($data); $i++) {
-                echo "\t{$data[$i]['Team']} \t{$data[$i]['Season']} \t{$data[$i]['# Avg Plays']}\n";
+                #echo "\t{$data[$i]['clubid']} \t{$data[$i]['season']} \t{$data[$i]['playcount']}\n";
+                echo str_pad($data[$i]['clubid'],15);
+                echo str_pad($data[$i]['season'],10);
+                echo str_pad($data[$i]['playcount'],10);
+                echo "\n\n";
             }
 
         }
