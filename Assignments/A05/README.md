@@ -1,5 +1,5 @@
-Run ascii_image.py on terminal and input the data it asks for.
-Font used SawarabiMincho-Regular.ttf
+Run ascii_image.py on terminal and input the data it asks for.  
+Font used: SawarabiMincho-Regular.ttf  
 Example:
 
 ```
