@@ -1,6 +1,6 @@
 Run ascii_image.py on terminal and input the data it asks for.
 Font used SawarabiMincho-Regular.ttf
-Example terminal input:
+Example:
 
 ```
 $ python ascii_image.py
