@@ -7,7 +7,7 @@ Sample input:
 ```
 $ python mosaic.py input_folder=serial_experiments_lain size=16 input=4.jpg output_folder=output
 ```
-"input_folder" needs to be a folder name in downloads, (couldn't get "\" to work with **kwargs)
+"input_folder" needs to be a folder name in downloads, (couldn't get "\\" to work with **kwargs)
 serial_experiments_lain is a folder in the downloads folder.
 Next the size of the image, this has to be smaller or equal to the subimage becuase the subimages get resized.
 Next "input" is a file in the input folder.
