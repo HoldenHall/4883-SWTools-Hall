@@ -29,10 +29,9 @@ def process_argv(args):
         k,v = arg.split('=')
         argd[k] = v
     return argd
+
 def resize(img,width):
-
         """
-
         This resizes the img while maintining aspect ratio. Keep in 
 
         mind that not all images scale to ascii perfectly because of the
@@ -42,16 +41,8 @@ def resize(img,width):
         closer together horizontally then vertically)
 
         """
-
-    
-
         img = img.resize((width ,width), Image.ANTIALIAS)
-
-
-
         return img
-
-
 if __name__ == '__main__':
     
     argd ={}
@@ -74,9 +65,7 @@ if __name__ == '__main__':
             percent_rgb[float(colors[i]['percent'])] = (colors[i]['rgb'])
 
         picture_dominant_color[image_list[x]] = percent_rgb[max(percent_rgb)]
-
-
-
+        
     path = (os.getcwd()+"\input\\"+argd['input'])
 
     filename = os.path.basename(path)
@@ -116,8 +105,7 @@ if __name__ == '__main__':
                         break
 
             delta = delta + 10
-
-
+            
         sub = Image.open(os.getcwd()+"\downloads\\"+argd['input_folder']+"\\"+similar_image)
         #paste subimage on input image
         newImg.paste(sub,(x,y))   
@@ -131,13 +119,3 @@ if __name__ == '__main__':
     newImg.show()
     newImg.save(os.getcwd()+"\\"+argd['output_folder']+"\\"+newname)
     
-
-
-
-
-
-
-
-
-
-
